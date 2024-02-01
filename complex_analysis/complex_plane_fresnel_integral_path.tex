@@ -1,0 +1,74 @@
+%-----------------------------------LICENSE------------------------------------%
+%   This file is part of tikz_figures.                                         %
+%                                                                              %
+%   tikz_figures is free software: you can redistribute it and/or              %
+%   modify it it under the terms of the GNU General Public License as          %
+%   published by the Free Software Foundation, either version 3 of the         %
+%   License, or (at your option) any later version.                            %
+%                                                                              %
+%   tikz_figures is distributed in the hope that it will be useful,            %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of             %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              %
+%   GNU General Public License for more details.                               %
+%                                                                              %
+%   You should have received a copy of the GNU General Public License along    %
+%   with tikz_figures.  If not, see <https://www.gnu.org/licenses/>.           %
+%------------------------------------------------------------------------------%
+
+% Use the standalone class for displaying the tikz image on a small PDF.
+\documentclass[crop, tikz]{standalone}
+
+% Import the tikz package to use for the drawing.
+\usepackage{tikz}
+
+% Needed for blackboard bold C.
+\usepackage{amssymb}
+
+% The arrow and decorations packages are used for the LaTeX arrow.
+\usetikzlibrary{arrows.meta, decorations.markings}
+
+% Begin the document.
+\begin{document}
+
+    % Draw the figure.
+    \begin{tikzpicture}[%
+        line width = 0.2mm,
+        line cap = round,
+        > = Latex,
+        ->-/.style = {%
+            decoration = {%
+                markings,
+                mark = at position 0.55 with \arrow{>},
+            },
+            postaction = {decorate}
+        },
+        scale = 1.7
+    ]
+
+        % Coordinates for points.
+        \coordinate (O) at (0.0, 0.0);
+        \coordinate (R) at (3.0, 0.0);
+        \coordinate (P) at (2.12132, 2.12132);
+        \coordinate (C) at (3.0, 3.0);
+        \coordinate (G) at (1.0, 1.5);
+
+        % Axes.
+        \begin{scope}[thick]
+            \draw[->] (-0.5, 0) to (4, 0) node[above] {$\Re\{z\}$};
+            \draw[->] (0, -0.5) to (0, 4) node[right] {$\Im\{z\}$};
+        \end{scope}
+
+        % Axes Labels.
+        \draw (3, 3pt) to (3, -3pt) node [below] {$R$};
+        \draw (3pt, 3) to (-3pt, 3) node [left]  {$R$};
+
+        % Draw the Jordan curve.
+        \draw[->-, draw = blue] (O) to (R);
+        \draw[->-, draw = blue] (P) to (O);
+        \draw[->-, draw = blue] (R) arc (0:45:3);
+
+        % Labels for various things.
+        \node at (G) {$C_{R}(t)$};
+        \node at (C) {\Large{$\mathbb{C}$}};
+    \end{tikzpicture}
+\end{document}

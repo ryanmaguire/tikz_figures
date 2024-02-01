@@ -1,0 +1,67 @@
+%-----------------------------------LICENSE------------------------------------%
+%   This file is part of tikz_figures.                                         %
+%                                                                              %
+%   tikz_figures is free software: you can redistribute it and/or              %
+%   modify it it under the terms of the GNU General Public License as          %
+%   published by the Free Software Foundation, either version 3 of the         %
+%   License, or (at your option) any later version.                            %
+%                                                                              %
+%   tikz_figures is distributed in the hope that it will be useful,            %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of             %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              %
+%   GNU General Public License for more details.                               %
+%                                                                              %
+%   You should have received a copy of the GNU General Public License along    %
+%   with tikz_figures.  If not, see <https://www.gnu.org/licenses/>.           %
+%------------------------------------------------------------------------------%
+
+% Use the standalone class for displaying the tikz image on a small PDF.
+\documentclass[crop, tikz]{standalone}
+
+% Import the tikz package to use for the drawing.
+\usepackage{tikz}
+
+% Needed for the minus symbol.
+\usepackage{amssymb}
+
+% Tikz packages used.
+\usetikzlibrary{arrows.meta}
+
+% Shorter minus symbol.
+\DeclareMathSymbol{\minus}{\mathbin}{AMSa}{"39}
+
+% Begin the document.
+\begin{document}
+
+    % Begin the drawing.
+    \begin{tikzpicture}[> = Latex]
+
+        % Draw the axes.
+        \draw[<->, thick] (0.0, -4.3) to (0.0, 4.3) node[right] {$y$};
+        \draw[<->, thick] (-4.3, 0.0) to (4.3, 0.0) node[above] {$x$};
+        
+        % Draw image charge in first quadrant.
+        \draw[fill = black] (3.0, 2.0) circle (1.5pt);
+        \draw[dashed] (0.0, 2.0) to node[above] {$a$} (3.0, 2.0);
+        \draw[dashed] (3.0, 0.0) to node[right] {$b$} (3.0, 2.0);
+        \node at (3.0, 2.0) [above right] {$q$};
+        
+        % Draw image charge in second quadrant.
+        \draw[fill = black] (-3.0, 2.0) circle (1.5pt);
+        \draw[dashed] (0.0, 2.0) to node[above] {$a$} (-3.0, 2.0);
+        \draw[dashed] (-3.0, 0.0) to node[left] {$b$} (-3.0, 2.0);
+        \node at (-3.0, 2.0) [above left] {$\minus{q}$};
+
+        % Draw image charge in third quadrant.
+        \draw[fill = black] (-3.0, -2.0) circle (1.5pt);
+        \draw[dashed] (0.0, -2.0) to node[below] {$a$} (-3.0, -2.0);
+        \draw[dashed] (-3.0, 0.0) to node[left] {$b$} (-3.0, -2.0);
+        \node at (-3.0, -2.0) [below left] {$q$};
+
+        % Draw image charge in first quadrant.
+        \draw[fill = black] (3.0, -2.0) circle (1.5pt);
+        \draw[dashed] (0.0, -2.0) to node[below] {$a$} (3.0, -2.0);
+        \draw[dashed] (3.0, 0.0) to node[right] {$b$} (3.0, -2.0);
+        \node at (3.0, -2.0) [below right] {$\minus{q}$};
+    \end{tikzpicture}
+\end{document}

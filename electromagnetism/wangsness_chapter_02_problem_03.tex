@@ -1,0 +1,85 @@
+%-----------------------------------LICENSE------------------------------------%
+%   This file is part of tikz_figures.                                         %
+%                                                                              %
+%   tikz_figures is free software: you can redistribute it and/or              %
+%   modify it it under the terms of the GNU General Public License as          %
+%   published by the Free Software Foundation, either version 3 of the         %
+%   License, or (at your option) any later version.                            %
+%                                                                              %
+%   tikz_figures is distributed in the hope that it will be useful,            %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of             %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              %
+%   GNU General Public License for more details.                               %
+%                                                                              %
+%   You should have received a copy of the GNU General Public License along    %
+%   with tikz_figures.  If not, see <https://www.gnu.org/licenses/>.           %
+%------------------------------------------------------------------------------%
+
+% Use the standalone class for displaying the tikz image on a small PDF.
+\documentclass[crop, tikz]{standalone}
+
+% Import the tikz package to use for the drawing.
+\usepackage{tikz}
+
+% Packages used for the LaTeX arrow.
+\usetikzlibrary{arrows.meta}
+
+% Begin the document.
+\begin{document}
+
+    % Begin the drawing.
+    \begin{tikzpicture}[%
+        line width = 0.4pt,
+        line cap = round,
+        > = Latex,
+        scale = 1.3
+    ]
+
+        % Coordinates for the origin and the coordinate axes.
+        \coordinate (X) at (0.0, 0.0, 3.5);
+        \coordinate (O) at (0.0, 0.0, 0.0);
+        \coordinate (Y) at (3.5, 0.0, 0.0);
+        \coordinate (Z) at (0.0, 3.5, 0.0);
+
+        % Coordinates for the points on the cube.
+        \coordinate (ax) at (0.0, 0.0, 2.0);
+        \coordinate (ay) at (0.0, 2.0, 0.0);
+        \coordinate (az) at (2.0, 0.0, 0.0);
+        \coordinate (axy) at (2.0, 0.0, 2.0);
+        \coordinate (axz) at (0.0, 2.0, 2.0);
+        \coordinate (ayz) at (2.0, 2.0, 0.0);
+        \coordinate (axyz) at (2.0, 2.0, 2.0);
+
+        % Draw the coordinate axes.
+        \draw[->] (O) to (X) node[below left] {$x$};
+        \draw[->] (O) to (Y) node[right] {$y$};
+        \draw[->] (O) to (Z) node[above] {$z$};
+
+        % Draw the edges of the cube.
+        \draw (ax) to (axy);
+        \draw (ax) to (axz);
+        \draw (ay) to (axy);
+        \draw (ay) to (ayz);
+        \draw (az) to (axz);
+        \draw (az) to (ayz);
+        \draw (axy) to (axyz);
+        \draw (axz) to (axyz);
+        \draw (ayz) to (axyz);
+
+        % Fill in circles at the vertices of the cube.
+        \draw[fill = black] (O) circle (0.3mm);
+        \draw[fill = black] (ax) circle (0.3mm);
+        \draw[fill = black] (ay) circle (0.3mm);
+        \draw[fill = black] (az) circle (0.3mm);
+        \draw[fill = black] (axy) circle (0.3mm);
+        \draw[fill = black] (axz) circle (0.3mm);
+        \draw[fill = black] (ayz) circle (0.3mm);
+        \draw[fill = black] (axyz) circle (0.3mm);
+
+        % Label the point charge at the origin, and points on the cube.
+        \node at (ax) [left] {$a$};
+        \node at (ay) [above left] {$a$};
+        \node at (az) [above right] {$a$};
+        \node at (O) [below right] {$q$};
+    \end{tikzpicture}
+\end{document}

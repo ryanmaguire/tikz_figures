@@ -1,0 +1,79 @@
+%-----------------------------------LICENSE------------------------------------%
+%   This file is part of tikz_figures.                                         %
+%                                                                              %
+%   tikz_figures is free software: you can redistribute it and/or              %
+%   modify it it under the terms of the GNU General Public License as          %
+%   published by the Free Software Foundation, either version 3 of the         %
+%   License, or (at your option) any later version.                            %
+%                                                                              %
+%   tikz_figures is distributed in the hope that it will be useful,            %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of             %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              %
+%   GNU General Public License for more details.                               %
+%                                                                              %
+%   You should have received a copy of the GNU General Public License along    %
+%   with tikz_figures.  If not, see <https://www.gnu.org/licenses/>.           %
+%------------------------------------------------------------------------------%
+
+% Use the standalone class for displaying the tikz image on a small PDF.
+\documentclass[crop, tikz]{standalone}
+
+% Import the tikz package to use for the drawing.
+\usepackage{tikz}
+
+% Tikz package used for the figure.
+\usetikzlibrary{patterns}
+
+% White space matters in these shading definitions. Do not add space around "=".
+\pgfdeclareradialshading{RedNormal}{\pgfqpoint{0bp}{0bp}}{%
+    color(0bp)=(white);
+    color(10bp)=(red!90!black);
+    color(20bp)=(black!75!red);
+    color(30bp)=(black);
+    color(100bp)=(black)%
+}
+
+\pgfdeclareradialshading{RedDistorted}{\pgfqpoint{10bp}{10bp}}{%
+    color(0bp)=(white);
+    color(10bp)=(red!90!black);
+    color(20bp)=(black!75!red);
+    color(30bp)=(black)%
+}
+
+\pgfdeclareradialshading{BlueNormal}{\pgfqpoint{0bp}{0bp}}{%
+    color(0bp)=(white);
+    color(10bp)=(blue!90!black);
+    color(20bp)=(black!75!blue);
+    color(30bp)=(black);
+    color(100bp)=(black)%
+}
+\pgfdeclareradialshading{BlueDistorted}{\pgfqpoint{10bp}{10bp}}{%
+    color(0bp)=(white);
+    color(10bp)=(blue!90!black);
+    color(20bp)=(black!75!blue);
+    color(30bp)=(black)%
+}
+
+\pgfdeclareradialshading{GrayNormal}{\pgfqpoint{0bp}{0bp}}{%
+    color(0bp)=(white);
+    color(25bp)=(black!100!gray)%
+}
+
+\pgfdeclareradialshading{GrayDistorted}{\pgfqpoint{10bp}{10bp}}{%
+    color(0bp)=(white);
+    color(25bp)=(black!100!gray)%
+}
+
+% Begin the document.
+\begin{document}
+
+    % Draw the figure.
+    \begin{tikzpicture}
+        \shade [shading = BlueNormal] (-5.0, 3.5) circle (1.5cm);
+        \shade [shading = RedNormal] (3.0, 3.5) circle (1.5cm);
+        \shade [shading = GrayNormal] (-1.0, 3.5) circle (1.5cm);
+        \shade [shading = GrayDistorted] (-1.0, -0.5) circle (1.5cm);
+        \shade [shading = BlueDistorted] (-5.0, -0.5) circle (1.5cm);
+        \shade [shading = RedDistorted] (3.0, -0.5) circle (1.5cm);
+    \end{tikzpicture}
+\end{document}

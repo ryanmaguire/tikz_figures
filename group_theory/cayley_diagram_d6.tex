@@ -1,0 +1,77 @@
+%-----------------------------------LICENSE------------------------------------%
+%   This file is part of tikz_figures.                                         %
+%                                                                              %
+%   tikz_figures is free software: you can redistribute it and/or              %
+%   modify it it under the terms of the GNU General Public License as          %
+%   published by the Free Software Foundation, either version 3 of the         %
+%   License, or (at your option) any later version.                            %
+%                                                                              %
+%   tikz_figures is distributed in the hope that it will be useful,            %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of             %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              %
+%   GNU General Public License for more details.                               %
+%                                                                              %
+%   You should have received a copy of the GNU General Public License along    %
+%   with tikz_figures.  If not, see <https://www.gnu.org/licenses/>.           %
+%------------------------------------------------------------------------------%
+
+% Use the standalone class for displaying the tikz image on a small PDF.
+\documentclass[crop, tikz]{standalone}
+
+% Import the tikz package to use for the drawing.
+\usepackage{tikz}
+
+% Tikz packages used.
+\usetikzlibrary{decorations.markings, arrows.meta}
+
+% Begin the document.
+\begin{document}
+
+    % Draw the figure.
+    \begin{tikzpicture}[%
+        ->-/.style = {%
+            decoration = {%
+                markings,
+                mark = at position 0.55 with \arrow{Stealth}
+            },
+            postaction = {decorate}
+        }
+    ]
+
+        % The coordinates for the outer triangle.
+        \coordinate (e) at (210.0:3.0);
+        \coordinate (r) at (330.0:3.0);
+        \coordinate (r2) at (90.00:3.0);
+
+        % The coordinates for the inner triangle.
+        \coordinate (f) at (210.0:1.5);
+        \coordinate (fr2) at (330.0:1.5);
+        \coordinate (fr) at (90.00:1.5);
+
+        % Dots for the coordinates.
+        \foreach\x in {e, r, r2, f, fr, fr2}{%
+            \draw[fill = black] (\x) circle (0.05);
+        }
+
+        % Solid arrows for rotations.
+        \draw[->-] (e) to (r);
+        \draw[->-] (r) to (r2);
+        \draw[->-] (r2) to (e);
+        \draw[->-] (f) to (fr);
+        \draw[->-] (fr) to (fr2);
+        \draw[->-] (fr2) to (f);
+
+        % Dashed arrows for reflections.
+        \draw[densely dashed] (e) to (f);
+        \draw[densely dashed] (r) to (fr2);
+        \draw[densely dashed] (r2) to (fr);
+
+        % Label the nodes.
+        \node at (e) [below left] {$e$};
+        \node at (r) [below right] {$r$};
+        \node at (r2) [above] {$r^{2}$};
+        \node at (f) [above left] {$f$};
+        \node at (fr) [right] {$fr$};
+        \node at (fr2) [above right] {$fr^{2}$};
+    \end{tikzpicture}
+\end{document}

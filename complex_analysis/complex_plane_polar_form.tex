@@ -1,0 +1,71 @@
+%-----------------------------------LICENSE------------------------------------%
+%   This file is part of tikz_figures.                                         %
+%                                                                              %
+%   tikz_figures is free software: you can redistribute it and/or              %
+%   modify it it under the terms of the GNU General Public License as          %
+%   published by the Free Software Foundation, either version 3 of the         %
+%   License, or (at your option) any later version.                            %
+%                                                                              %
+%   tikz_figures is distributed in the hope that it will be useful,            %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of             %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              %
+%   GNU General Public License for more details.                               %
+%                                                                              %
+%   You should have received a copy of the GNU General Public License along    %
+%   with tikz_figures.  If not, see <https://www.gnu.org/licenses/>.           %
+%------------------------------------------------------------------------------%
+
+% Use the standalone class for displaying the tikz image on a small PDF.
+\documentclass[crop, tikz]{standalone}
+
+% Import the tikz package to use for the drawing.
+\usepackage{tikz}
+
+% Needed for blackboard bold C.
+\usepackage{amssymb}
+
+% The arrow package is used for the LaTeX arrow.
+\usetikzlibrary{arrows.meta}
+
+% Begin the document.
+\begin{document}
+
+    % Draw the figure.
+    \begin{tikzpicture}[%
+        > = Latex,
+        line width = 0.2mm,
+        line cap = round,
+        font = \large
+    ]
+
+        % Coordinates for various points.
+        \coordinate (O) at (0.0, 0.0);
+        \coordinate (z) at (30:2in);
+        \coordinate (x) at (1.5in, 0.0in);
+        \coordinate (C) at (1.9in, 1.9in);
+
+        % Axes.
+        \begin{scope}[thick]
+            \draw[->] (-0.2in,  0.0in) to (2.5in, 0.0in) node [above] {$\Re\{z\}$};
+            \draw[->] ( 0.0in, -0.2in) to (0.0in, 2.5in) node [right] {$\Im\{z\}$};
+        \end{scope}
+
+        % Axes labels:
+        \foreach\n in {1, 2}{%
+            \draw (\n{in}, 3pt) to (\n{in}, -3pt) node [below] {$\n$};
+            \draw (3pt, \n{in}) to (-3pt, \n{in}) node [left] {$\n{i}$};
+        }
+
+        % Draw a line from the origin to the point z.
+        \draw (O) to node [above] {$r$} (z);
+
+        % Draw a dot marking the point z.
+        \draw[fill = black] (z) circle (0.4mm);
+
+        % Nodes to label various things.
+        \node at (C) {\Large{$\mathbb{C}$}};
+        \node at (z) [above] {$z=(r,\theta)$};
+        \node at (x) [above right] {$\theta$};
+        \draw (x) arc (0:30:1.5in);
+    \end{tikzpicture}
+\end{document}
