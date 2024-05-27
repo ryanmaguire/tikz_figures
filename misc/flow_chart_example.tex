@@ -1,0 +1,55 @@
+%-----------------------------------LICENSE------------------------------------%
+%   This file is part of tikz_figures.                                         %
+%                                                                              %
+%   tikz_figures is free software: you can redistribute it and/or              %
+%   modify it it under the terms of the GNU General Public License as          %
+%   published by the Free Software Foundation, either version 3 of the         %
+%   License, or (at your option) any later version.                            %
+%                                                                              %
+%   tikz_figures is distributed in the hope that it will be useful,            %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of             %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              %
+%   GNU General Public License for more details.                               %
+%                                                                              %
+%   You should have received a copy of the GNU General Public License along    %
+%   with tikz_figures.  If not, see <https://www.gnu.org/licenses/>.           %
+%------------------------------------------------------------------------------%
+
+% Use the standalone class for displaying the tikz image on a small PDF.
+\documentclass[crop, tikz]{standalone}
+
+% Import the tikz package to use for the drawing.
+\usepackage{tikz}
+
+% The arrows package is used for the LaTeX arrow.
+\usetikzlibrary{arrows.meta}
+
+% Begin the document.
+\begin{document}
+
+    % Draw the figure.
+    \begin{tikzpicture}[%
+        > = Latex,
+        line width = 0.2mm,
+        line cap = round
+    ]
+        % Coordinates for the labels and nodes.
+        \coordinate (A) at (+0.0, +4.0);
+        \coordinate (B) at (+0.0, +0.0);
+        \coordinate (C) at (-2.0, -4.0);
+        \coordinate (D) at (+2.0, -5.0);
+        \coordinate (E) at (+0.0, -5.0);
+
+        % Arrows connecting nodes on the flow chart.
+        \draw[->, shorten > = 0.25in] (A) to (B);
+        \draw[->, shorten > = 0.40in] (B) to (E);
+
+        % The three nodes in the flow chart.
+        \draw[fill = white] (A) circle (1.2) node {Starting Thing};
+        \draw[fill = white] (B) ellipse (1.2 and 0.6) node {Other Thing};
+        \draw[fill = white] (C) rectangle node {The End Thing} (D);
+
+        % Text that is not part of any of the nodes.
+        \node (Text) at (4.0, 4.0) [below = 2in] {Super cool text};
+    \end{tikzpicture}
+\end{document}
